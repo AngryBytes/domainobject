@@ -5,6 +5,50 @@ This is a simple class that signifies classes that extend it are a
 it offers a [properties](http://en.wikipedia.org/wiki/Property_(programming) )
 implementation, that is lacking from PHP.
 
+## Why
+
+We believe in a plain old php objects (POPO) for modelling your domain. These
+objects should hold no logic other than their core values. A DomainObject
+should have a direct link to an entity in your Universe of Discourse.
+
+This class helps you do that in a generic way. It has some niceties such as
+support for accessing your properties through both functions and object
+property notation. But mostly, it is a strong signal that the class that's
+extending it is, in fact, a DomainObject.
+
+### Why not simply rely on public variables?
+
+Using simple variables like:
+
+```php
+class Person
+{
+    public $name;
+}
+```
+
+Works pretty well for most simple properties.
+
+Imagine the following though:
+
+```php
+class Person
+{
+    public $firstName;
+
+    public $lastName;
+
+    public function getFullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
+}
+```
+
+In order to get the full name for a person (first + last), you need to write a
+method. Now you have to mix both properties and methods in your API. This is
+not very consistent and rather inflexible.
+
 ## Example
 
 ```php
@@ -72,48 +116,4 @@ $json = json_encode(
     $post->toArray()
 );
 ```
-
-## Why
-
-We believe in a plain old php objects (POPO) for modelling your domain. These
-objects should hold no logic other than their core values. A DomainObject
-should have a direct link to an entity in your Universe of Discourse.
-
-This class helps you do that in a generic way. It has some niceties such as
-support for accessing your properties through both functions and object
-property notation. But mostly, it is a strong signal that the class that's
-extending it is, in fact, a DomainObject.
-
-### Why not simply rely on public variables?
-
-Using simple variables like:
-
-```php
-class Person
-{
-    public $name;
-}
-```
-
-Works pretty well for most simple properties.
-
-Imagine the following though:
-
-```php
-class Person
-{
-    public $firstName;
-
-    public $lastName;
-
-    public function getFullName()
-    {
-        return $this->firstName . ' ' . $this->lastName;
-    }
-}
-```
-
-In order to get the full name for a person (first + last), you need to write a
-method. Now you have to mix both properties and methods in your API. This is
-not very consistent and rather inflexible.
 
