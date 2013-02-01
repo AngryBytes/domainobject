@@ -76,6 +76,33 @@ class ComposedTest extends TestCase
         );
     }
 
+    /**
+     * Testing to array with property list
+     *
+     * @return void
+     **/
+    public function testToArrayWithProperties()
+    {
+        $bar = $this->createBar();
+
+        $array = $bar->toArrayWithProperties(array('bar'));
+
+        $this->assertArrayHasKey(
+            'bar',
+            $array
+        );
+
+        $this->assertTrue(
+            !isset($array['foo'])
+        );
+
+    }
+
+    /**
+     * Create a Bar
+     *
+     * @return Bar
+     **/
     private function createBar()
     {
         return new Bar;
