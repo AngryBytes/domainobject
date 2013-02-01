@@ -4,13 +4,12 @@
  *
  * ABC Manager 5
  *
- * @category        Abc
- * @package         Core
- * @subpackage      Domain
- * @copyright       Copyright (c) 2010 Angry Bytes BV (http://www.angrybytes.com)
+ * @category        AngryBytes
+ * @package         DomainObject
+ * @copyright       Copyright (c) 2013 Angry Bytes BV (http://www.angrybytes.com)
  */
 
-namespace Abc\Core;
+namespace AngryBytes;
 
 use \InvalidArgumentException as InvalidArgumentException;
 
@@ -57,9 +56,8 @@ use \ReflectionMethod as ReflectionMethod;
  * echo $foo->bar;
  * </code>
  *
- * @category        Abc
- * @package         Core
- * @subpackage      Domain
+ * @category        AngryBytes
+ * @package         DomainObject
  */
 class DomainObject
 {
