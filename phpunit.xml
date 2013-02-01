@@ -1,0 +1,10 @@
+<phpunit
+    bootstrap="./tests/bootstrap.php"
+    colors="true"
+    >
+
+    <testsuite name="DomainObject">
+        <directory>./tests/AngryBytes/DomainObject/Test</directory>
+    </testsuite>
+
+</phpunit>
