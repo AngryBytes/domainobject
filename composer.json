@@ -1,7 +1,6 @@
 {
     "name": "angrybytes/domainobject",
     "description": "A simple DomainObject implementation that provides simulated properties for PHP < 5.5",
-    "version": "0.0.1",
     "authors": [
         {
             "name": "Maurice Fonk",
