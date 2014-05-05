@@ -14,7 +14,6 @@
     },
     "require": {},
     "require-dev": {
-        "phpunit/phpunit": "3.7.x-dev"
-    },
-    "minimum-stability": "stable"
+        "phpunit/phpunit": "3.7.*"
+    }
 }
