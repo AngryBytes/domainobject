@@ -4,8 +4,15 @@
     "license": "MIT",
     "authors": [
         {
+            "name": "Angry Bytes BV",
+            "email": "info@angrybytes.com",
+            "role": "owner",
+            "homepage": "http://angrybytes.com/"
+        },
+        {
             "name": "Maurice Fonk",
-            "email": "git@naneau.net"
+            "email": "maurice@naneau.net",
+            "role": "developer"
         }
     ],
     "autoload": {
