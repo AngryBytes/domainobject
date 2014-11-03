@@ -5,7 +5,7 @@
 
 This is a simple class that signifies classes that extend it are a
 [DomainObject](http://c2.com/cgi/wiki?DomainObject). In a more practical sense
-it offers a [properties](http://en.wikipedia.org/wiki/Property_(programming\))
+it offers a [properties](http://en.wikipedia.org/wiki/Property_(programming))
 implementation, that is lacking from PHP.
 
 ## Why
