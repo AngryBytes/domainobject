@@ -1,35 +1,16 @@
 <?php
-/**
- * PropertiesTest.php
- *
- * ABC Manager 5
- *
- * @category        AngryBytes
- * @package         DomainObject
- * @subpackage      Test
- * @copyright       Copyright (c) 2010 Angry Bytes BV (http://www.angrybytes.com)
- */
 
 namespace AngryBytes\DomainObject\Test;
 
 /**
- * PropertiesTest
- *
  * Testing properties
- *
- * @category        AngryBytes
- * @package         DomainObject
- * @subpackage      Test
  */
-class PropertiesTest extends TestCase
+class PropertiesTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * Test properties access
-     *
-     * @return void
-     **/
-    public function testProperties()
+     */
+    public function testProperties(): void
     {
         $foo = $this->createFoo();
 
@@ -54,23 +35,15 @@ class PropertiesTest extends TestCase
 
     /**
      * Test array conversion
-     *
-     * @return void
-     **/
-    public function testArray()
+     */
+    public function testArray(): void
     {
         $foo = $this->createFoo();
 
         $array = $foo->toArray();
 
-        $this->arrayHasKey(
-            'foo',
-            $array
-        );
-        $this->arrayHasKey(
-            'bar',
-            $array
-        );
+        $this->arrayHasKey('foo');
+        $this->arrayHasKey('bar');
 
         $this->assertEquals(
             'foo',
@@ -82,14 +55,9 @@ class PropertiesTest extends TestCase
         );
     }
 
-    /**
-     * Create a Foo
-     *
-     * @return Foo
-     **/
-    private function createFoo()
+    private function createFoo(): Foo
     {
-        $foo = new Foo;
+        $foo = new Foo();
 
         return $foo
             ->setFoo('foo')

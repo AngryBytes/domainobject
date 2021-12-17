@@ -1,37 +1,18 @@
 <?php
-/**
- * ComposedTest.php
- *
- * ABC Manager 5
- *
- * @category        Abc
- * @package         DomainObject
- * @subpackage      Test
- * @copyright       Copyright (c) 2010 Angry Bytes BV (http://www.angrybytes.com)
- */
 
 namespace AngryBytes\DomainObject\Test;
 
 /**
- * ComposedTest
- *
  * Testing composed object
- *
- * @category        Abc
- * @package         DomainObject
- * @subpackage      Test
  */
-class ComposedTest extends TestCase
+class ComposedTest extends \PHPUnit\Framework\TestCase
 {
-
     /**
      * Test properties
-     *
-     * @return void
-     **/
-    public function testProperties()
+     */
+    public function testProperties(): void
     {
-        $bar = $this->createBar();
+        $bar = new Bar();
 
         $this->assertEquals(
             'bar',
@@ -46,12 +27,10 @@ class ComposedTest extends TestCase
 
     /**
      * Test composed to array
-     *
-     * @return void
-     **/
-    public function testToArray()
+     */
+    public function testToArray(): void
     {
-        $bar = $this->createBar();
+        $bar = new Bar();
 
         $array = $bar->toArray();
 
@@ -78,14 +57,12 @@ class ComposedTest extends TestCase
 
     /**
      * Testing to array with property list
-     *
-     * @return void
-     **/
-    public function testToArrayWithProperties()
+     */
+    public function testToArrayWithProperties(): void
     {
-        $bar = $this->createBar();
+        $bar = new Bar();
 
-        $array = $bar->toArrayWithProperties(array('bar'));
+        $array = $bar->toArrayWithProperties(['bar']);
 
         $this->assertArrayHasKey(
             'bar',
@@ -95,16 +72,5 @@ class ComposedTest extends TestCase
         $this->assertTrue(
             !isset($array['foo'])
         );
-
-    }
-
-    /**
-     * Create a Bar
-     *
-     * @return Bar
-     **/
-    private function createBar()
-    {
-        return new Bar;
     }
 }

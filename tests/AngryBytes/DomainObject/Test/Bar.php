@@ -1,52 +1,18 @@
 <?php
-/**
- * Bar.php
- *
- * ABC Manager 5
- *
- * @category        AngryBytes
- * @package         DomainObject
- * @subpackage      Test
- * @copyright       Copyright (c) 2010 Angry Bytes BV (http://www.angrybytes.com)
- */
 
 namespace AngryBytes\DomainObject\Test;
 
-use AngryBytes\DomainObject;
-
 /**
- * Bar
- *
  * Bar object, holds a Foo
- *
- * @category        AngryBytes
- * @package         DomainObject
- * @subpackage      Test
  */
-class Bar extends DomainObject
+class Bar extends \AngryBytes\DomainObject
 {
-    /**
-     * Foo prop
-     *
-     * @var Foo
-     **/
-    private $foo;
+    private Foo $foo;
+    private string $bar;
 
-    /**
-     * Bar
-     *
-     * @var string
-     **/
-    private $bar;
-
-    /**
-     * Constructor
-     *
-     * @return void
-     **/
     public function __construct()
     {
-        $foo = new Foo;
+        $foo = new Foo();
 
         $foo
             ->setFoo('foo')
@@ -57,46 +23,24 @@ class Bar extends DomainObject
             ->setBar('bar');
     }
 
-    /**
-     * Get the foo property
-     *
-     * @return Foo
-     */
-    public function getFoo()
+    public function getFoo(): Foo
     {
         return $this->foo;
     }
 
-    /**
-     * Set the foo property
-     *
-     * @param Foo $foo
-     * @return Bar
-     */
-    public function setFoo(Foo $foo)
+    public function setFoo(Foo $foo): self
     {
         $this->foo = $foo;
 
         return $this;
     }
 
-    /**
-     * Get the bar prop
-     *
-     * @return string
-     */
-    public function getBar()
+    public function getBar(): string
     {
         return $this->bar;
     }
 
-    /**
-     * Set the bar prop
-     *
-     * @param string $bar
-     * @return Bar
-     */
-    public function setBar($bar)
+    public function setBar(string $bar): self
     {
         $this->bar = $bar;
 

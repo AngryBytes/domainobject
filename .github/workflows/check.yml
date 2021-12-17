@@ -1,0 +1,51 @@
+name: Check
+
+on:
+  push:
+    branches: ['master']
+  pull_request:
+    branches: ['master']
+
+jobs:
+
+  # Run PHP checks for all supported versions.
+  check-php:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        php: ['7.4', '8.0', '8.1']
+    steps:
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ matrix.php }}
+        tools: cs2pr
+
+    - name: Get composer cache directory
+      id: composer-cache
+      run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+    - name: Cache composer dependencies
+      uses: actions/cache@v2
+      with:
+        path: ${{ steps.composer-cache.outputs.dir }}
+        key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.json') }}
+        restore-keys: |
+          ${{ runner.os }}-composer-
+
+    - name: Install composer dependencies
+      run: composer install --prefer-dist
+
+    - name: PHPStan
+      run: vendor/bin/phpstan analyse -c phpstan.neon -l max --error-format=checkstyle src/ tests/ | cs2pr
+
+    - name: PHP CodeSniffer
+      run: vendor/bin/phpcs --standard=PSR2 --extensions=php --report=checkstyle src/ tests/ | cs2pr
+
+    - name: PHPUnit
+      run: vendor/bin/phpunit

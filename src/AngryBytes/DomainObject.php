@@ -1,21 +1,6 @@
 <?php
-/**
- * DomainObject.php
- *
- * ABC Manager 5
- *
- * @category        AngryBytes
- * @package         DomainObject
- * @copyright       Copyright (c) 2013 Angry Bytes BV (http://www.angrybytes.com)
- */
 
 namespace AngryBytes;
-
-use \InvalidArgumentException as InvalidArgumentException;
-
-// Reflection
-use \ReflectionObject as ReflectionObject;
-use \ReflectionMethod as ReflectionMethod;
 
 /**
  * DomainObject
@@ -55,9 +40,6 @@ use \ReflectionMethod as ReflectionMethod;
  * // echoes 'baz'
  * echo $foo->bar;
  * </code>
- *
- * @category        AngryBytes
- * @package         DomainObject
  */
 class DomainObject
 {
@@ -66,11 +48,11 @@ class DomainObject
      *
      * Inflects all getter methods and retrieves the property name from them
      *
-     * @return array[int]string
-     **/
-    public function getProperties()
+     * @return string[]
+     */
+    public function getProperties(): array
     {
-        $properties = array();
+        $properties = [];
         foreach ($this->getGetters() as $getter) {
             $properties[] = self::propertyNameFromGetter($getter);
         }
@@ -91,11 +73,11 @@ class DomainObject
      *
      * @see DomainObject::getProperties()
      *
-     * @return array[string]mixed
-     **/
-    public function toArray()
+     * @return array<string, mixed>
+     */
+    public function toArray(): array
     {
-        $array = array();
+        $array = [];
 
         foreach ($this->getProperties() as $property) {
             $array[$property] = $this->getPropertyValueAsSimple($property);
@@ -107,12 +89,12 @@ class DomainObject
     /**
      * Create an array of the DO with properties
      *
-     * @param  array[int]string   $properties
-     * @return array[string]mixed
+     * @param  string[]             $properties
+     * @return array<string, mixed>
      */
-    public function toArrayWithProperties(array $properties)
+    public function toArrayWithProperties(array $properties): array
     {
-        $array = array();
+        $array = [];
         foreach ($properties as $property) {
             $array[$property] = $this->getPropertyValueAsSimple($property);
         }
@@ -128,19 +110,18 @@ class DomainObject
      *
      * @see toArray()
      *
-     * @param  string       $property
-     * @return array|scalar
-     **/
-    public function getPropertyValueAsSimple($property)
+     * @return mixed
+     */
+    public function getPropertyValueAsSimple(string $property)
     {
         if ($this->$property instanceof DomainObject) {
-
             // Simple recursion for child DO's
             return $this->$property->toArray();
+        }
 
-        } elseif ($this->propertyIsTraversable($property)) {
+        if ($this->propertyIsTraversable($property)) {
             // Property is traversable
-            $value = array();
+            $value = [];
 
             // Traverse the
             foreach ($this->$property as $childKey => $childValue) {
@@ -152,7 +133,6 @@ class DomainObject
             }
 
             return $value;
-
         }
 
         // All other properties are returned as is
@@ -161,11 +141,8 @@ class DomainObject
 
     /**
      * Is a property traversable?
-     *
-     * @param  string $property
-     * @return bool
      */
-    public function propertyIsTraversable($property)
+    public function propertyIsTraversable(string $property): bool
     {
         return is_array($this->$property)
             || $this->$property instanceof \Traversable
@@ -176,17 +153,16 @@ class DomainObject
     /**
      * Overloaded getter for access to properties without using getter method
      *
-     * @param  string $name
      * @return mixed
-     **/
-    public function __get($name)
+     */
+    public function __get(string $name)
     {
         // Getter function name
         $function = self::getterNameFromProperty($name);
 
         // Make sure there's a getter
         if (!method_exists($this, $function)) {
-            throw new InvalidArgumentException(
+            throw new \InvalidArgumentException(
                 'No getter for "' . $name . '" in "' . get_class($this) . '"'
             );
         }
@@ -196,33 +172,26 @@ class DomainObject
 
     /**
      * Overloaded setter for access to properties without using setter method
-     *
-     * @param  string $name
-     * @param  mixed  $value
-     * @return void
-     **/
-    public function __set($name, $value)
+     */
+    public function __set(string $name, mixed $value): void
     {
         // Setter function name
         $function = self::setterNameFromProperty($name);
 
         // Make sure there's a getter
         if (!method_exists($this, $function)) {
-            throw new InvalidArgumentException('No setter for "' . $name . '"');
+            throw new \InvalidArgumentException('No setter for "' . $name . '"');
         }
 
-        return $this->$function($value);
+        $this->$function($value);
     }
 
     /**
      * Overloaded isset
      *
      * Assumes "set" when there is a getter for a property
-     *
-     * @param  string $name
-     * @return bool
      */
-    public function __isset($name)
+    public function __isset(string $name): bool
     {
         return method_exists(
             $this,
@@ -231,48 +200,18 @@ class DomainObject
     }
 
     /**
-     * Is there a setter for $propertyName?
-     *
-     * @param string $propertyName
-     * @return bool
-     **/
-    private function hasSetter($propertyName)
-    {
-        return method_exists(
-            $this,
-            self::setterNameFromProperty($propertyName)
-        );
-    }
-
-    /**
-     * Is there a getter for $propertyName?
-     *
-     * @param string $propertyName
-     * @return bool
-     **/
-    private function hasGetter($propertyName)
-    {
-        return method_exists(
-            $this,
-            self::getterNameFromProperty($propertyName)
-        );
-    }
-
-    /**
      * Get all getter methods of the class
      *
-     * @return array[int]string
-     **/
-    private function getGetters()
+     * @return string[]
+     */
+    private function getGetters(): array
     {
         // Reflect the instance
-        $reflection = new ReflectionObject($this);
-
-        $getters = array();
+        $reflection = new \ReflectionObject($this);
 
         // List all methods
-        foreach ($reflection->getMethods(ReflectionMethod::IS_PUBLIC) as $method) {
-
+        $getters = [];
+        foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
             // Only methods starting with "get" make the cut
             if (substr($method->getName(), 0, 3) !== 'get') {
                 continue;
@@ -302,33 +241,24 @@ class DomainObject
 
     /**
      * Get the name of the getter function for a property name
-     *
-     * @param  string $name
-     * @return string
-     **/
-    private static function getterNameFromProperty($name)
+     */
+    private static function getterNameFromProperty(string $name): string
     {
         return 'get' . ucfirst($name);
     }
 
     /**
      * Get the name of the setter function for a property name
-     *
-     * @param  string $name
-     * @return string
-     **/
-    private static function setterNameFromProperty($name)
+     */
+    private static function setterNameFromProperty(string $name): string
     {
         return 'set' . ucfirst($name);
     }
 
     /**
      * Get the property name contained in a getter function name
-     *
-     * @param  string $getter
-     * @return string
-     **/
-    private static function propertyNameFromGetter($getter)
+     */
+    private static function propertyNameFromGetter(string $getter): string
     {
         return lcfirst(
             substr($getter, 3)
