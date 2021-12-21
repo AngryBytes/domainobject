@@ -1,37 +1,36 @@
 parameters:
-	ignoreErrors:
-		-
-			message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Bar\\:\\:\\$bar\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
+  ignoreErrors:
+    -
+      message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Bar\\:\\:\\$bar\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
-		-
-			message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Bar\\:\\:\\$foo\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
+    -
+      message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Bar\\:\\:\\$foo\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
-		-
-			message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$bar\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
+    -
+      message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$bar\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
-		-
-			message: "#^Cannot access offset 'bar' on mixed\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
+    -
+      message: "#^Cannot access offset 'bar' on mixed\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
-		-
-			message: "#^Parameter \\#2 \\$array of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, mixed given\\.$#"
-			count: 2
-			path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
+    -
+      message: "#^Parameter \\#2 \\$array of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, mixed given\\.$#"
+      count: 2
+      path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
-		-
-			message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$bar\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/PropertiesTest.php
+    -
+      message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$bar\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/PropertiesTest.php
 
-		-
-			message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$foo\\.$#"
-			count: 1
-			path: tests/AngryBytes/DomainObject/Test/PropertiesTest.php
-
+    -
+      message: "#^Access to private property AngryBytes\\\\DomainObject\\\\Test\\\\Foo\\:\\:\\$foo\\.$#"
+      count: 1
+      path: tests/AngryBytes/DomainObject/Test/PropertiesTest.php
