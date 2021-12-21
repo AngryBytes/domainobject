@@ -1,8 +1,5 @@
 # DomainObject
 
-[![Build Status](https://travis-ci.org/AngryBytes/domainobject.svg?branch=master)](https://travis-ci.org/AngryBytes/domainobject)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/AngryBytes/domainobject/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/AngryBytes/domainobject/?branch=master)
-
 This is a simple class that signifies classes that extend it are a
 [DomainObject](http://c2.com/cgi/wiki?DomainObject). In a more practical sense
 it offers a [properties](http://en.wikipedia.org/wiki/Property_(programming))
