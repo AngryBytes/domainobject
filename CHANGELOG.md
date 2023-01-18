@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.0.1
+
+### PHP support
+
+- Added support for PHP `8.2`.
+
 ## 2.0.0
 
 ### PHP support
