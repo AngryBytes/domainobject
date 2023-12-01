@@ -2,6 +2,8 @@
 
 namespace AngryBytes;
 
+use InvalidArgumentException;
+
 /**
  * DomainObject
  *
@@ -144,10 +146,7 @@ class DomainObject
      */
     public function propertyIsTraversable(string $property): bool
     {
-        return is_array($this->$property)
-            || $this->$property instanceof \Traversable
-            ||  $this->$property instanceof \stdClass
-            ;
+        return is_iterable($this->$property) || $this->$property instanceof \stdClass;
     }
 
     /**
@@ -162,7 +161,7 @@ class DomainObject
 
         // Make sure there's a getter
         if (!method_exists($this, $function)) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'No getter for "' . $name . '" in "' . get_class($this) . '"'
             );
         }
@@ -180,7 +179,7 @@ class DomainObject
 
         // Make sure there's a getter
         if (!method_exists($this, $function)) {
-            throw new \InvalidArgumentException('No setter for "' . $name . '"');
+            throw new InvalidArgumentException('No setter for "' . $name . '"');
         }
 
         $this->$function($value);
@@ -213,7 +212,7 @@ class DomainObject
         $getters = [];
         foreach ($reflection->getMethods(\ReflectionMethod::IS_PUBLIC) as $method) {
             // Only methods starting with "get" make the cut
-            if (substr($method->getName(), 0, 3) !== 'get') {
+            if (!str_starts_with($method->getName(), 'get')) {
                 continue;
             }
 
