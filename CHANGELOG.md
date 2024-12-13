@@ -1,5 +1,13 @@
 # Changelog
 
+## 4.0.0
+
+### PHP support
+
+- Dropped support for PHP `8.1` and lower.
+- Added support for PHP `8.4`.
+- Removed `DomainObject::propertyIsTraversable`.
+
 ## 3.0.0
 
 ### PHP support

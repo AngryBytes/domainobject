@@ -21,7 +21,7 @@ parameters:
       path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 
     -
-      message: "#^Parameter \\#2 \\$array of method PHPUnit\\\\Framework\\\\Assert\\:\\:assertArrayHasKey\\(\\) expects array\\|ArrayAccess, mixed given\\.$#"
+      identifier: argument.type
       count: 2
       path: tests/AngryBytes/DomainObject/Test/ComposedTest.php
 

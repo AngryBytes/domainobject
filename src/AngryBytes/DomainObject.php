@@ -116,37 +116,34 @@ class DomainObject
      */
     public function getPropertyValueAsSimple(string $property)
     {
-        if ($this->$property instanceof DomainObject) {
+        $value = $this->$property;
+
+        if ($value instanceof DomainObject) {
             // Simple recursion for child DO's
-            return $this->$property->toArray();
+            return $value->toArray();
         }
 
-        if ($this->propertyIsTraversable($property)) {
+        if ($value instanceof \stdClass) {
+            $value = (array) $value;
+        }
+        if (is_iterable($value)) {
             // Property is traversable
-            $value = [];
+            $newValue = [];
 
             // Traverse the
-            foreach ($this->$property as $childKey => $childValue) {
+            foreach ($value as $childKey => $childValue) {
                 if ($childValue instanceof DomainObject) {
-                    $value[$childKey] = $childValue->toArray();
+                    $newValue[$childKey] = $childValue->toArray();
                 } else {
-                    $value[$childKey] = $childValue;
+                    $newValue[$childKey] = $childValue;
                 }
             }
 
-            return $value;
+            return $newValue;
         }
 
         // All other properties are returned as is
-        return $this->$property;
-    }
-
-    /**
-     * Is a property traversable?
-     */
-    public function propertyIsTraversable(string $property): bool
-    {
-        return is_iterable($this->$property) || $this->$property instanceof \stdClass;
+        return $value;
     }
 
     /**
