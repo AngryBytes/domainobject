@@ -1,5 +1,9 @@
 # Changelog
 
+## 4.0.1
+
+- Added support for PHP `8.5`.
+
 ## 4.0.0
 
 ### PHP support

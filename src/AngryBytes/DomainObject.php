@@ -132,10 +132,12 @@ class DomainObject
 
             // Traverse the
             foreach ($value as $childKey => $childValue) {
-                if ($childValue instanceof DomainObject) {
-                    $newValue[$childKey] = $childValue->toArray();
-                } else {
-                    $newValue[$childKey] = $childValue;
+                if (is_string($childKey) || is_int($childKey)) {
+                    if ($childValue instanceof DomainObject) {
+                        $newValue[$childKey] = $childValue->toArray();
+                    } else {
+                        $newValue[$childKey] = $childValue;
+                    }
                 }
             }
 
